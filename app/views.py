@@ -7,7 +7,10 @@ from flask import render_template
 def main():
     return render_template('main.html')
 
-@app.route("/submit", methods=['POST'])
-def submit():    
-    return AppController().get_output()
+@app.route("/tmp", methods=['POST'])
+def temporary():    
+    return AppController().tmp()
 
+@app.route("/classify", methods=['POST'])
+def get_result():
+    return AppController().get_result()

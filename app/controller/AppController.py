@@ -17,7 +17,7 @@ class AppController:
 
         dic = {0: 'Cerscospora', 1: 'Healthy', 2: 'Rust'}
 
-        model = load_model('app/models/ResNet50V4.h5')
+        model = load_model('./app/models/ResNet50V4.h5')
 
         # Membuka gambar dari path yang diberikan dan mengubah ukurannya menjadi 220x220 piksel
         image_array = image.load_img(image_path, target_size=(220, 220))
@@ -46,9 +46,8 @@ class AppController:
             'highest_probability': round(highest_probability, 2),  # Probabilitas tertinggi
             'other_probabilities': other_probabilities # Probabilitas kelas lainnya
         }
-    def get_output(self):
+    def tmp(self):
         if request.method != 'POST':
-            print('error')
             return jsonify({"error": "Bad request"}), 400
 
         try:
@@ -56,10 +55,31 @@ class AppController:
             image_data = image_data.split(",")[1]  # remove the "data:image/jpeg;base64," part
             image_file = io.BytesIO(base64.b64decode(image_data))
             filename = f"{uuid.uuid4()}.jpg"
-            filepath = os.path.join("static/temp", filename)
+            filepath = os.path.join("./app/static/temp", filename)
             with open(filepath, "wb") as f:
                 image_file.seek(0)
                 f.write(image_file.read())
+        except Exception as e:
+            return jsonify({"error": "Bad request", "message": str(e)}), 400
+
+        return jsonify({
+            'message': 'Image uploaded successfully',
+            'image_path': filepath
+        })
+    def get_result(self):
+        if request.method != 'POST':
+            print('error')
+            return jsonify({"error": "Bad request"}), 400
+
+        try:
+            base64data = request.form['image']
+            filepath = base64.b64decode(base64data)
+
+            img_filename = str(uuid.uuid4()) + ".jpg"
+            img_path = "./app/static/temp/" + img_filename
+
+            with open(img_path, "wb") as f:
+                f.write(filepath)
 
             result = AppController.predict_label(filepath)
         except Exception as e:
