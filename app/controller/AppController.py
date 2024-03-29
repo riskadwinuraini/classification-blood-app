@@ -20,11 +20,11 @@ class AppController:
         model = load_model('./app/models/ResNet50V4.h5')
 
         # Membuka gambar dari path yang diberikan dan mengubah ukurannya menjadi 220x220 piksel
-        image_array = image.load_img(image_path, target_size=(220, 220))
+        image_array = image.load_img(image_path, target_size=(256, 256))
         # Mengubah gambar menjadi array numpy dan menormalisasi nilai pikselnya menjadi rentang 0-1
         image_array = image.img_to_array(image_array) / 255.0
         # Mengubah bentuk array gambar agar sesuai dengan input model (jumlah gambar, tinggi, lebar, saluran warna)
-        image_array = image_array.reshape((1, 220, 220, 3))
+        image_array = image_array.reshape((1, 256, 256, 3))
 
         # Melakukan prediksi label gambar menggunakan model
         predictions = model.predict(image_array)
@@ -42,48 +42,51 @@ class AppController:
 
         # Mengembalikan hasil prediksi dalam bentuk dictionary
         return {
-            'label': dic[predicted_class], # Label kelas dengan probabilitas tertinggi
+            'label': dic[predicted_class].encode('utf-8').decode(), # Label kelas dengan probabilitas tertinggi
             'highest_probability': round(highest_probability, 2),  # Probabilitas tertinggi
-            'other_probabilities': other_probabilities # Probabilitas kelas lainnya
+            'other_probabilities': {k.encode('utf-8').decode(): v for k, v in other_probabilities.items()} # Probabilitas kelas lainnya
         }
-    def tmp(self):
-        if request.method != 'POST':
-            return jsonify({"error": "Bad request"}), 400
+    # def tmp(self):
+    #     if request.method != 'POST':
+    #         return jsonify({"error": "Bad request"}), 400
 
-        try:
-            image_data = request.form['image']
-            image_data = image_data.split(",")[1]  # remove the "data:image/jpeg;base64," part
-            image_file = io.BytesIO(base64.b64decode(image_data))
-            filename = f"{uuid.uuid4()}.jpg"
-            filepath = os.path.join("./app/static/temp", filename)
-            with open(filepath, "wb") as f:
-                image_file.seek(0)
-                f.write(image_file.read())
-        except Exception as e:
-            return jsonify({"error": "Bad request", "message": str(e)}), 400
+    #     try:
+    #         image_data = request.form['image']
+    #         image_data = image_data.split(",")[1]  # remove the "data:image/jpeg;base64," part
+    #         image_file = io.BytesIO(base64.b64decode(image_data))
+    #         filename = f"{uuid.uuid4()}.jpg"
+    #         filepath = os.path.join("./app/static/temp", filename)
+    #         with open(filepath, "wb") as f:
+    #             image_file.seek(0)
+    #             f.write(image_file.read())
+    #     except Exception as e:
+    #         return jsonify({"error": "Bad request", "message": str(e)}), 400
 
-        return jsonify({
-            'message': 'Image uploaded successfully',
-            'image_path': filepath
-        })
+    #     return jsonify({
+    #         'message': 'Image uploaded successfully',
+    #         'image_path': filepath
+    #     })
     def get_result(self):
         if request.method != 'POST':
             print('error')
             return jsonify({"error": "Bad request"}), 400
 
         try:
+            # Mendapatkan base64 data dari form request
             base64data = request.form['image']
-            filepath = base64.b64decode(base64data)
 
+            # Mengubah base64 data menjadi byte dan menyimpannya ke file temp
+            filepath = base64.b64decode(base64data.encode('ascii'))
             img_filename = str(uuid.uuid4()) + ".jpg"
             img_path = "./app/static/temp/" + img_filename
 
             with open(img_path, "wb") as f:
-                f.write(filepath)
+                f.write(filepath) # Menyimpan file image base64 ke folder temp
 
-            result = AppController.predict_label(filepath)
-        except Exception as e:
-            return jsonify({"error": "Bad request", "message": str(e)}), 400
+            result = self.predict_label(img_path)
+
+        except KeyError:
+             return jsonify({"error": "Image data not found in the form"}), 400
 
         return jsonify({
             'label': result['label'],
@@ -91,7 +94,7 @@ class AppController:
                 'main': result['highest_probability'],
                 'others': result['other_probabilities']
             },
-            'image_path': filepath
+            # 'image_path': img_path
         })
 
 
