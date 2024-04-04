@@ -21,6 +21,9 @@ $(document).ready(function () {
                         image: base64data,
                     },
                     contentType: "application/x-www-form-urlencoded",
+                    beforeSend: function () {
+                        $("#progressModal").modal("show");
+                    },
                     success: function (data) {
                         updateImagePreview(data);
                         createPieChart(data);
@@ -28,9 +31,13 @@ $(document).ready(function () {
                         $(".main-probabilitas").text(
                             data.probabilities.main + "%"
                         );
+                        $("#progressModal").modal("hide");
+                        $("#upload-img").prop("disabled", true);
+
                     },
                     error: function (err) {
                         console.log(err);
+                        $("#progressModal").modal("hide");
                     },
                 });
             };
