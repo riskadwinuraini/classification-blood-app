@@ -583,7 +583,7 @@ strong {
 }
 
 .custom-block-overlay-text {
-    position: absolute;
+    position: relative;
     z-index: 2;
     top: 0;
     right: 0;

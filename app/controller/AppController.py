@@ -46,26 +46,6 @@ class AppController:
             'highest_probability': round(highest_probability, 2),  # Probabilitas tertinggi
             'other_probabilities': {k.encode('utf-8').decode(): v for k, v in other_probabilities.items()} # Probabilitas kelas lainnya
         }
-    # def tmp(self):
-    #     if request.method != 'POST':
-    #         return jsonify({"error": "Bad request"}), 400
-
-    #     try:
-    #         image_data = request.form['image']
-    #         image_data = image_data.split(",")[1]  # remove the "data:image/jpeg;base64," part
-    #         image_file = io.BytesIO(base64.b64decode(image_data))
-    #         filename = f"{uuid.uuid4()}.jpg"
-    #         filepath = os.path.join("./app/static/temp", filename)
-    #         with open(filepath, "wb") as f:
-    #             image_file.seek(0)
-    #             f.write(image_file.read())
-    #     except Exception as e:
-    #         return jsonify({"error": "Bad request", "message": str(e)}), 400
-
-    #     return jsonify({
-    #         'message': 'Image uploaded successfully',
-    #         'image_path': filepath
-    #     })
     def get_result(self):
         if request.method != 'POST':
             print('error')
@@ -94,7 +74,22 @@ class AppController:
                 'main': result['highest_probability'],
                 'others': result['other_probabilities']
             },
-            # 'image_path': img_path
+            'image_path': img_path
         })
+    
+    def clearImage(self):
+
+        temp_dir = os.path.join(os.getcwd(), 'app', 'static', 'temp')
+
+        try:
+            for filename in os.listdir(temp_dir):
+                file_path = os.path.join(temp_dir, filename)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+
+            return jsonify(success=True, message='Semua gambar di temp berhasil dihapus.')
+
+        except Exception as e:
+            return jsonify(success=False, message=f'Terjadi kesalahan: {str(e)}')
 
 
