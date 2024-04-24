@@ -33,7 +33,6 @@ $(document).ready(function () {
                         );
                         $("#progressModal").modal("hide");
                         $("#upload-img").prop("disabled", true);
-
                     },
                     error: function (err) {
                         console.log(err);

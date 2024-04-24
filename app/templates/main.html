@@ -9,7 +9,7 @@
 
     clearImage = () => {
         document.getElementById("upload-img").value = null;
-        document.getElementById("img-prev").src = "";
+        document.getElementById("img-prev").src = "../../static/img/bg-merah.jpg";
         document.getElementById("img-prev").dataset.trigger = "";
         document.getElementById("upload-form").reset();
         $('#pieChart').hide();
@@ -31,17 +31,33 @@
 
 {% block content %}
 
-<section class="featured-section">
+<section class="" style="margin-top: 200px;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-4 col-12 mb-4 mb-lg-0">
-                <div class="custom-block bg-white shadow-lg">
-                    <form method="POST" enctype="multipart/form-data" id="upload-form">
-                        <input type="file" name="image" class="form-control mb-2" id="upload-img"
-                            accept=".jpg, .jpeg" />
-                        <img src="" alt="image-preview" width="100%" id="img-prev" data-trigger="" />
-                    </form>
+                <div class="card">
+                    <div class="card-header  p-0 mx-3 mt-3 position-relative z-index-1">
+                        <h4 class="text-uppercase">Upload Image</h4>
+                    </div>
+
+                    <div class="card-body pt-2">
+                        <p class="card-description mb-4">
+                            <img src="../../static/img/bg-merah.jpg" alt="image-preview"
+                                class="img-fluid border-radius-lg" id="img-prev" data-trigger="" width="50%">
+
+                        <form method="POST" enctype="multipart/form-data" id="upload-form">
+                            <input type="file" name="image" class="form-control mb-2" id="upload-img"
+                                accept=".jpg, .jpeg" />
+                            <small class="text-sm">SVG, PNG, JPG or GIF (MAX. 800x400px).</small>
+                        </form>
+                        </p>
+                        <div class="author align-items-center">
+                            <button class="btn btn-danger mt-2" onclick="clearImage()">
+                                Reset</button>
+                        </div>
+                    </div>
                 </div>
+
             </div>
 
             <!-- Modal Progress bar -->
@@ -49,57 +65,52 @@
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <!-- <h5 class="modal-title" id="progressModalLabel">File Upload</h5> -->
-                        </div>
-                        <div class="modal-body">
+
+                        <div class="modal-body text-center">
                             <h3>Mohon Tunggu Sebentar</h3>
-                            <!-- <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 0%;" id="uploadProgressBar"
-                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-8 col-12">
-                <div class="custom-block custom-block-overlay">
-                    <div class="d-flex flex-column h-100">
-
-                        <div class="custom-block-overlay-text">
-
-                            <h5 class="text-white mb-2">Grafik</h5>
-
-                            <div class="card">
-                                <div class="d-flex justify-content-center">
-                                    <div id="pie" class="">
-                                        <div class="card-body justify-content-end">
-                                            <canvas id="pieChart"></canvas>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <p>
-                                            Hasil = <button class="btn btn-info"><small
-                                                    class="main-label"></small></button> <br> <br>
-                                            Probabilitas = <button class="btn btn-success"><small
-                                                    class="main-probabilitas"></small></button>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-warning mt-2" onclick="clearImage()"> <i
-                                    class="bi bi-arrow-clockwise"></i>
-                                Reset</button>
-
-                        </div>
-
-                        <div class="section-overlay"></div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-uppercase">Grafik</h4>
                     </div>
+
+                    <div class="card-body d-flex justify-content-center">
+                        <div id="pie" class="">
+                            <div class="card-body">
+                                <canvas id="pieChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="align-items-start mt-4">
+                            <p class="mb-0">
+                                <strong>Hasil:</strong> <small class="main-label"></small>
+                            </p>
+                            <p class="mb-0">
+                                <strong>Probabilitas:</strong> <small class="main-probabilitas"></small>%
+                            </p>
+                        </div>
+                    </div>
+                    <div class="section-overlay"></div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 </section>
 
+
+<article>
+    <div class="container">
+        <div class="row mt-4 py-4">
+            <h3>Tutorial</h3>
+            <p>
+                1. Upload gambar yang ingin di klasifikasikan <br>
+            </p>
+        </div>
+    </div>
+</article>
 {% endblock %}
