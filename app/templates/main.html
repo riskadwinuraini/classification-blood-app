@@ -60,6 +60,37 @@
 
             </div>
 
+            <!-- Modal Cropping Imaages -->
+            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel">Crop the image</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="img-container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img id="sample_image" src="" class="w-100" alt="Picture">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="preview"
+                                            style=" margin-left: 50px; overflow: hidden; width: 250px; height: 250px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Modal Cropping Imaages -->
+
             <!-- Modal Progress bar -->
             <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="progressModalLabel"
                 aria-hidden="true">
@@ -72,7 +103,9 @@
                     </div>
                 </div>
             </div>
+            <!--  /Modal Progress bar -->
 
+            <!-- Grafik -->
             <div class="col-lg-8 col-12">
                 <div class="card">
                     <div class="card-header">
@@ -97,6 +130,8 @@
                     <div class="section-overlay"></div>
                 </div>
             </div>
+
+            <!-- /Grafik -->
         </div>
     </div>
     </div>
