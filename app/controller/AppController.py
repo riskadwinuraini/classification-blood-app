@@ -29,6 +29,13 @@ class AppController:
         # Melakukan prediksi label gambar menggunakan model
         predictions = model.predict(image_array)
 
+        # Jika model tidak menghasilkan probabilitas
+        if not np.any(predictions):
+            
+            return {
+                'error': 'Model tidak menghasilkan probabilitas. Silakan cek input gambar.'
+            }
+
         # Mendapatkan indeks kelas dengan probabilitas tertinggi dari prediksi
         predicted_class = np.argmax(predictions[0])
 
