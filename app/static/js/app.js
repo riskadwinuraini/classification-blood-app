@@ -32,7 +32,7 @@ $(document).ready(function () {
                 viewMode: 3,
                 cropBoxResizable: true,
                 preview: ".preview",
-                dragMode: "move"
+                dragMode: "move",
             });
         })
         .on("hidden.bs.modal", function () {
@@ -70,6 +70,13 @@ $(document).ready(function () {
                         $("#progressModal").modal("show");
                     },
                     success: function (data) {
+                        // Jika model tidak menghasilkan probabilitas
+                        if (data.error) {
+                            console.log(data.error);
+                            $("#progressModal").modal("hide");
+                            return;
+                        }
+
                         updateImagePreview(data);
                         createPieChart(data);
                         $(".main-label").text(data.label);
