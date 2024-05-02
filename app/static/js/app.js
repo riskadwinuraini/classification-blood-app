@@ -73,6 +73,7 @@ $(document).ready(function () {
                         // Jika model tidak menghasilkan probabilitas
                         if (data.error) {
                             console.log(data.error);
+                            // alert(data.error);
                             $("#progressModal").modal("hide");
                             return;
                         }
@@ -100,7 +101,8 @@ $(document).ready(function () {
 
 function updateImagePreview(data) {
     var imagePath = data.image_path
-        ? "http://127.0.0.1:4000/static/temp/" +
+        ? window.location.origin +
+          "/static/temp/" +
           data.image_path.split("\\").pop().split("/").pop()
         : "";
     $("#img-prev").attr("src", imagePath);
