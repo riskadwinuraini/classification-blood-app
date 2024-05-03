@@ -5,6 +5,7 @@ COPY . /srv
 COPY requirements.txt /srv
 
 RUN python -m pip install --upgrade pip 
+RUN python -m pip install --upgrade Pillow
 RUN pip install --force-reinstall -r requirements.txt
 RUN pip cache purge
 
