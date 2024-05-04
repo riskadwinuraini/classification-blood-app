@@ -15,7 +15,7 @@ class AppController:
     @staticmethod
     def predict_label(image_path):
 
-        dic = {0: 'Ellyptocytes', 1: 'Normal', 2: 'Ovalocytes', 3: 'Stomatocytes', 4: 'Teardrop'}
+        dic = {0: 'Ellyptocytes', 1: 'Normal', 2: 'Ovalocytes', 3: 'Random',4: 'Stomatocytes', 5: 'Teardop'}
 
         model = load_model('./app/models/ResNet50V4.h5')
 
@@ -28,6 +28,7 @@ class AppController:
 
         # Melakukan prediksi label gambar menggunakan model
         predictions = model.predict(image_array)
+
 
         # Jika model tidak menghasilkan probabilitas
         if not np.any(predictions):

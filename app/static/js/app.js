@@ -28,11 +28,16 @@ $(document).ready(function () {
             var finalAspectRatio = finalCropWidth / finalCropHeight;
 
             cropper = new Cropper(image, {
-                aspectRatio: finalAspectRatio,
                 viewMode: 3,
-                cropBoxResizable: true,
+                cropBoxResizable: false,
                 preview: ".preview",
                 dragMode: "move",
+                ready: function () {
+                    cropper.setCropBoxData({
+                        width: 30,
+                        height: 30,
+                    });
+                },
             });
         })
         .on("hidden.bs.modal", function () {
