@@ -9,7 +9,7 @@
 
     clearImage = () => {
         document.getElementById("upload-img").value = null;
-        document.getElementById("img-prev").src = "../../static/img/bg-merah.jpg";
+        document.getElementById("img-prev").src = "../../static/img/upload.png";
         document.getElementById("img-prev").dataset.trigger = "";
         document.getElementById("upload-form").reset();
         $('#pieChart').hide();
@@ -42,7 +42,7 @@
 
                     <div class="card-body pt-2">
                         <p class="card-description mb-4">
-                            <img src="../../static/img/bg-merah.jpg" alt="image-preview"
+                            <img src="../../static/img/upload.png" alt="image-preview"
                                 class="img-fluid border-radius-lg" id="img-prev" data-trigger="" width="50%">
 
                         <form method="POST" enctype="multipart/form-data" id="upload-form">
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                            <button type="button" class="btn" style="background-color: #4586F6; color: white;" id="crop">Crop</button>
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
             <div class="col-lg-8 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="text-uppercase">Grafik</h4>
+                        <h4 class="text-uppercase">Percentage Graph</h4>
                     </div>
 
                     <div class="card-body d-flex justify-content-center">
@@ -146,7 +146,7 @@
                 1. Download the material from <a href="../../static/img/darah.jpg" class="text-danger"
                     download="bahan">this LINK</a> <br>
                 2. Click "Choose File" and select the image you want to crop. Then, click "Open". <br>
-                <img src="../static/img/tutorial/1.png" alt="" width="300"> <br>
+                <img src="../static/img/upload.png" alt="" width="200"> <br>
                 3. Adjust the dimensions of the image cropping by adjusting the cropping box or entering the dimensions
                 manually. <br>
                 4. Once satisfied with the selection, press "<strong>CROP</strong>" to cut the image according to the
