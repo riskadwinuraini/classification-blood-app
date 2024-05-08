@@ -41,7 +41,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-{% set is_classification_page = request.path.startswith('/classification') or request.path.startswith('/information') %}
+{% set is_classification_page = request.path.startswith('/classification') or request.path.startswith('/information') or request.path.startswith('/tutorial') %}
 {% set body = 'sub_page' if is_classification_page else '' %}
 
 <body class="{{ body }}">

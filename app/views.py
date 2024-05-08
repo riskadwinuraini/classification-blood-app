@@ -14,6 +14,10 @@ def classification():
 @app.route('/information')
 def information():
     return render_template('information.html')
+
+@app.route('/tutorial')
+def tutorial():
+    return render_template('tutorial.html')
 @app.route("/classify", methods=['POST'])
 def get_result():
     return AppController().get_result()

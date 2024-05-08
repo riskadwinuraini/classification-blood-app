@@ -1,0 +1,51 @@
+{% extends "layout/app.html" %}
+
+{% block scripts %}
+
+{{ super() }}
+<style>
+    .clearfix::after {
+        clear: both;
+        display: block;
+        content: '';
+    }
+</style>
+
+<!-- Addons script -->
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row mt-4 py-4">
+            <div class="col-lg-12">
+
+
+                <h3>Here's the tutorial:</h3>
+                <p>
+                    1. Download the material from <a href="../../static/img/darah.jpg" class="text-danger"
+                        download="bahan">this LINK</a> <br>
+                    2. Click "Choose File" and select the image you want to crop. Then, click "Open". <br>
+                    <img src="../static/img/upload.png" alt="" width="200"> <br>
+                    3. Adjust the dimensions of the image cropping by adjusting the cropping box or entering the
+                    dimensions
+                    manually. <br>
+                    4. Once satisfied with the selection, press "<strong>CROP</strong>" to cut the image according to
+                    the
+                    specified dimensions. <br>
+                    <img src="../static/img/tutorial/2.png" alt="" width="500"> <br>
+                    5. The detection result will be displayed, allowing you to compare the cropped result with the
+                    original
+                    image. <br>
+                    <img src="../static/img/tutorial/3.png" alt="" width="500"> <br>
+                    6. To restart the detection process, press "<strong>RESET</strong>" to remove detection artifacts
+                    and
+                    restore the application to its initial state. <br>
+                    <img src="../static/img/tutorial/4.png" alt="" width="300">
+
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

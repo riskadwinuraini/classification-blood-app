@@ -1,6 +1,6 @@
 <div class="hero_area">
 
-  {% if not request.path.startswith('/classification') and not request.path.startswith('/information') %}
+  {% if not request.path.startswith('/classification') and not request.path.startswith('/information') and not request.path.startswith('/tutorial') %}
   <div class="hero_bg_box">
     <img src="../../static/assets/images/coba.png" alt="">
   </div>
@@ -26,23 +26,22 @@
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/classification"> Classification</a>
+              <a class="nav-link" href="/tutorial">Tutorial</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/information">Information</a>
             </li>
-            <form class="form-inline">
-              <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </button>
-            </form>
+            <li class="nav-item">
+              <a class="nav-link" href="/classification"> Classification</a>
+            </li>
           </ul>
         </div>
       </nav>
     </div>
   </header>
 
-  {% if not request.path.startswith('/classification') and not request.path.startswith('/information') %}
+  {% if not request.path.startswith('/classification') and not request.path.startswith('/information') and not request.path.startswith('/tutorial')%}
+  
   <!-- slider section -->
   <section class="slider_section ">
     <div id="customCarousel1" class="carousel slide" data-ride="carousel">
