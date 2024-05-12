@@ -16,6 +16,14 @@ class AppController:
     def predict_label(image_path):
 
         dic = {0: 'Ellyptocytes', 1: 'Normal', 2: 'Ovalocytes', 3: 'Random',4: 'Stomatocytes', 5: 'Teardop'}
+        descriptions = {
+            'Ellyptocytes': 'The system recognizes that the chosen item is categorized as ELLYPTOCYTES. To get a detailed explanation, you can click on the button provided below.',
+            'Normal': 'The system recognizes that the chosen item is categorized as NORMAL. To get a detailed explanation, you can click on the button provided below.',
+            'Ovalocytes': 'The system recognizes that the chosen item is categorized as OVALOCYTES. To get a detailed explanation, you can click on the button provided below.',
+            'Stomatocytes': 'The system recognizes that the chosen item is categorized as STOMATOCYTES. To get a detailed explanation, you can click on the button provided below.',
+            'Teardop': 'The system recognizes that the chosen item is categorized as TEARDOP. To get a detailed explanation, you can click on the button provided below.'
+        }
+
 
         model = load_model('./app/models/ResNet50V4.h5')
 
@@ -52,7 +60,8 @@ class AppController:
         return {
             'label': dic[predicted_class].encode('utf-8').decode(), # Label kelas dengan probabilitas tertinggi
             'highest_probability': round(highest_probability, 2),  # Probabilitas tertinggi
-            'other_probabilities': {k.encode('utf-8').decode(): v for k, v in other_probabilities.items()} # Probabilitas kelas lainnya
+            'other_probabilities': {k.encode('utf-8').decode(): v for k, v in other_probabilities.items()}, # Probabilitas kelas lainnya
+            'description': descriptions[dic[predicted_class]].encode('utf-8').decode()
         }
     def get_result(self):
         if request.method != 'POST':
@@ -82,7 +91,8 @@ class AppController:
                 'main': result['highest_probability'],
                 'others': result['other_probabilities']
             },
-            'image_path': img_path
+            'image_path': img_path,
+            'description': result['description']
         })
     
     def clearImage(self):

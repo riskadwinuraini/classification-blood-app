@@ -86,6 +86,24 @@ $(document).ready(function () {
                         updateImagePreview(data);
                         createPieChart(data);
                         $(".main-label").text(data.label);
+
+                        $(".main-description").html(
+                            data.description +
+                                '<br> <a href="#" id="readMore">Read more...</a>'
+                        );
+
+                        const redirectMap = {
+                            Normal: "/information#a-1",
+                            Ellyptocytes: "/information#a-2",
+                            Ovalocytes: "/information#a-3",
+                            Stomatocytes: "/information#a-5",
+                            Teardrop: "/information#a-6",
+                        };
+
+                        const redirectUrl = redirectMap[data.label] || "/";
+
+                        $("#readMore").attr("href", redirectUrl);
+
                         $(".main-probabilitas").text(
                             data.probabilities.main + "%"
                         );
