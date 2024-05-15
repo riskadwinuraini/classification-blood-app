@@ -96,8 +96,8 @@ $(document).ready(function () {
                             Normal: "/information#a-1",
                             Ellyptocytes: "/information#a-2",
                             Ovalocytes: "/information#a-3",
-                            Stomatocytes: "/information#a-5",
-                            Teardrop: "/information#a-6",
+                            Stomatocytes: "/information#a-4",
+                            Teardrop: "/information#a-5",
                         };
 
                         const redirectUrl = redirectMap[data.label] || "/";
