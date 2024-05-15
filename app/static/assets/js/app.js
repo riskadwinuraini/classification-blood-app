@@ -89,7 +89,7 @@ $(document).ready(function () {
 
                         $(".main-description").html(
                             data.description +
-                                '<br> <a href="#" id="readMore">Read more...</a>'
+                                '<br> <a href="#" class="btn btn-sm mt-2" style="background-color: #178066 !important; color:white;" id="readMore">Read more</a>'
                         );
 
                         const redirectMap = {
@@ -97,7 +97,7 @@ $(document).ready(function () {
                             Ellyptocytes: "/information#a-2",
                             Ovalocytes: "/information#a-3",
                             Stomatocytes: "/information#a-4",
-                            Teardrop: "/information#a-5",
+                            Teardop: "/information#a-5",
                         };
 
                         const redirectUrl = redirectMap[data.label] || "/";

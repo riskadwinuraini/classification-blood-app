@@ -102,7 +102,7 @@ class AppController:
         try:
             for filename in os.listdir(temp_dir):
                 file_path = os.path.join(temp_dir, filename)
-                if os.path.isfile(file_path):
+                if os.path.isfile(file_path) and not file_path.endswith('.md'):
                     os.remove(file_path)
 
             return jsonify(success=True, message='Semua gambar di temp berhasil dihapus.')
