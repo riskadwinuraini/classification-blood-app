@@ -102,6 +102,10 @@ $(document).ready(function () {
 
                         const redirectUrl = redirectMap[data.label] || "/";
 
+                        if (data.label !== "Normal") {
+                            $(".suggestion").css("display", "block");
+                        }
+
                         $("#readMore").attr("href", redirectUrl);
 
                         $(".main-probabilitas").text(
